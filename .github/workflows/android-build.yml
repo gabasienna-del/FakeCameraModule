@@ -8,15 +8,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 17 (Temurin)
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
+          architecture: x64
+
+      - name: Print Java version
+        run: java -version
 
       - name: Install Android SDK
         run: |
@@ -32,7 +37,10 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build APK
-        run: ./gradlew assembleDebug --no-daemon
+        env:
+          JAVA_HOME: ${{ steps.setup-java.outputs.java-home }}
+          ANDROID_SDK_ROOT: $HOME/android-sdk
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
