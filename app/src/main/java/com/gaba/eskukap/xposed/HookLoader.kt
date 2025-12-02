@@ -1,10 +1,7 @@
 package com.gaba.eskukap.xposed
 
-import de.robv.android.xposed.IXposedHookLoadPackage
-import de.robv.android.xposed.callbacks.XC_LoadPackage
-
-class HookLoader : IXposedHookLoadPackage {
-    override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
-        // Hook code later
-    }
+// Временно пустой класс, чтобы сборка прошла.
+// Позже вернём полноценный Hook и добавим нужные зависимости.
+class HookLoader {
+    // placeholder for future Xposed implementation
 }
